@@ -13,6 +13,12 @@ Item {
             width: parent.width
             text: modelData.name || model.name
             font.bold: true
+            Button {
+                width: height
+                height: parent.height
+                text: "X"
+                anchors.right: parent.right
+            }
         }
 
         model: ListModel {
