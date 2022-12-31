@@ -1,7 +1,9 @@
+#include <QString>
 #include <QtTest>
-#include <QCoreApplication>
 
-// add necessary includes here
+#include "check_available_groceries.h"
+#include "../../entities/grocery_items.h"
+#include "../../repositories/grocery_items_repo_dummy.h"
 
 class Usecases_check_available_groceries : public QObject
 {
@@ -29,7 +31,7 @@ void Usecases_check_available_groceries::test_one_or_more_grocery_items_availabl
     // And one or more grocery items are actually available
     auto groceryItemsRepoDummy = new repositories::GroceryItemsRepoDummy(groceryItems);
     groceryItems->setRepository(groceryItemsRepoDummy);
-    QVERIFY(groceryItemsRepoDummy->count > 0);
+    QVERIFY(groceryItemsRepoDummy->count() > 0);
     // When I check available groceries
     auto checkAvailableGroceries = new usecases::CheckAvailableGroceries(groceryItems, this);
     QSignalSpy checkAvailableGroceriesSuccess(checkAvailableGroceries, &usecases::CheckAvailableGroceries::success);
