@@ -4,4 +4,5 @@ SUBDIRS += \
     usecases \
     #gui \
     entities \
-    repositories
+    repositories \
+    tui
