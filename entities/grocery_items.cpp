@@ -26,6 +26,16 @@ void GroceryItems::create(const QString& name)
     }
 }
 
+void GroceryItems::remove(const QString& name)
+{
+    m_isSortedByNameAsc = false;
+    m_list.removeOne(QVariantMap{{"name", name}});
+    sortBy("name","ASC");
+    emit listChanged();
+    emit removed("ENTITIES_GROCERY_ITEMS__REMOVED");
+}
+
+
 bool GroceryItems::contains(const QString &field, const QString &value) const
 {
     return m_list.contains(QVariantMap{{field, value}});

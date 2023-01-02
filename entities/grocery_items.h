@@ -20,6 +20,7 @@ public:
     ~GroceryItems();
     bool isSortedBy(const QString& field, const QString& direction) const;
     void create(const QString& type);
+    void remove(const QString& name);
     bool contains(const QString& type, const QString& value) const;
     void sortBy(const QString& field, const QString& direction);
     QVariantList list() const;
@@ -30,7 +31,9 @@ signals:
     void allRetrieved(QString message);
     void allNotRetrieved(QString message);
     void created(QString message);
+    void removed(QString message);
     void notCreated(QString message);
+    void notRemoved(QString message);
     void listChanged();
 
 private:
