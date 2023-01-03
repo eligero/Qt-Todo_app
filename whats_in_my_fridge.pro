@@ -2,7 +2,7 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     usecases \
-    #gui \
+    gui \
     entities \
     repositories \
     tui

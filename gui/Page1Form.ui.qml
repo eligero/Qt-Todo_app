@@ -1,26 +1,17 @@
-import QtQuick 2.4
+import QtQuick 2.7
 import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.3
 
 Item {
     id: item1
-    width: 400
-    height: 400
+    property alias addItemField: addItemField
+    property alias addItemButton: addItemButton
+    property alias groceriesListView: groceriesListView
+    signal itemRemoved(string itemName)
 
     ListView {
-        id: listView
+        id: groceriesListView
         anchors.fill: parent
-        delegate: ItemDelegate {
-            width: parent.width
-            text: modelData.name || model.name
-            font.bold: true
-            Button {
-                width: height
-                height: parent.height
-                text: "X"
-                anchors.right: parent.right
-            }
-        }
-
         model: ListModel {
             ListElement {
                 name: "Bananas"
@@ -38,6 +29,23 @@ Item {
                 name: "Eggs"
             }
         }
+
+        delegate: ItemDelegate {
+            width: groceriesListView.width
+            text: modelData.name || model.name
+            font.bold: true
+            Button {
+                id: removeItemButton
+                width: height
+                height: parent.height
+                text: "X"
+                anchors.right: parent.right
+                Connections {
+                    target: removeItemButton
+                    onClicked: itemRemoved(modelData.name || model.name)
+                }
+            }
+        }
     }
 
     Row {
@@ -48,18 +56,19 @@ Item {
         anchors.bottom: parent.bottom
 
         TextField {
-            id: textField
+            id: addItemField
             placeholderText: "enter item name"
         }
 
         Button {
-            id: button
-            text: "Add item"
+            id: addItemButton
+            text: qsTr("Add item")
         }
     }
 }
 
+
 /*##^## Designer {
-    D{i:25;anchors_width:200;anchors_x:131}
+    D{i:0;autoSize:true;height:480;width:640}
 }
  ##^##*/
